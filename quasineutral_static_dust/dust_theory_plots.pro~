@@ -1,0 +1,20 @@
+;+
+; Simple line plots of theoretical initial profiles
+; for quasineutral static dust project.
+;-
+
+n_0 = 1e10                                 ;Background plasma density
+Z_d = 1.0                                  ;Dust charge state
+z = findgen(1000)/999                      ;Coordinate
+z_0 = 0.5                                  ;Location of Guassian peak
+sigma = 0.2/(2*sqrt(2*alog(2)))            ;Guassian standard deviation
+alpha = 0.1                                ;Ratio of dust-to-ion density
+n_d = alpha*n0*exp(-0.5*((z-z_0)/sigma)^2) ;Given dust profile
+n_i = 0.5*Z_d*n_d* $                       ;Analytic equilibrium ion profile
+      (1+sqrt(1+(2*n_0/Z_d/n_d)^2))        ;
+n_e = n_i-Z_d*n_d                          ;Electron profile from quasineutrality
+
+loadct, 39
+plot, z,n_d,xstyle=1,yrange=[0,1.1*max([max(n_i,/nan),max(n_e,/nan),max(n_d,/nan)])]
+oplot, z,n_i,color=80
+oplot, z,n_e,color=240

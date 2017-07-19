@@ -1,0 +1,35 @@
+;;==Determine number of plots
+np = max([n_elements(plotStep),1])
+
+;;==Declare transpose order
+xyzt = (np gt 1) ? [1,0,2,3] : [1,0,2]
+
+;;==Declare (untransposed) data ranges
+rngs = {x: [0,grid.nx-1], $
+        y: [0,grid.ny-1], $
+        z: [0,grid.nz-1]}
+vecs = {x: grid.x[rngs.x[0]:rngs.x[1]], $
+        y: grid.y[rngs.y[0]:rngs.y[1]], $
+        z: grid.z[rngs.z[0]:rngs.z[1]]}
+
+;;==Manipulate data (e.g. subset, transpose)
+for it=0,n_tags(data)-1 do $
+   data.(it) = (data.(it))[rngs.x[0]:rngs.x[1], $
+                           rngs.y[0]:rngs.y[1], $
+                           rngs.z[0]:rngs.z[1], $
+                           *]
+for it=0,n_tags(data)-1 do $
+   data.(it) = reform(transpose(data.(it),xyzt))
+
+;;==Create project struct
+prj = {title: "parametric_wave/run000", $
+       xyzt: xyzt, $
+       np: np, $
+       data: data, $
+       xrng: rngs.(xyzt[0]), $
+       yrng: rngs.(xyzt[1]), $
+       zrng: rngs.(xyzt[2]), $
+       xvec: vecs.(xyzt[0]), $
+       yvec: vecs.(xyzt[1]), $
+       zvec: vecs.(xyzt[2])}
+delvar, rngs,vecs

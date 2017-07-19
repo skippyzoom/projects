@@ -1,0 +1,152 @@
+;+
+; Plot initial densities for quasineutral static dust project
+;
+; NB: The simulation grid is the x-y plane but the physical
+;     grid is the x-z plane.
+;
+;-
+
+baseDir = '/projectnb/eregion/may/Stampede_runs/quasineutral_static_dust/'
+cd, baseDir+'run009'
+@load_eppic_params
+
+cd, baseDir+'common'
+n_z = grid.ny*nout_avg
+L_z = dy*n_z
+Z_d = abs(dust_charge)
+n_d = dust_den*n0d1
+sig = dust_sigma*L_z
+z_0 = dust_mid*L_z
+
+z = dy*findgen(n_z)
+f_d = Z_d*n_d*exp(-0.5*((z-z_0)/sig)^2)
+
+name = "initial_dust.pdf"
+ymajor = 5
+yminor = 3
+ytickvalues = fix(L_z)*indgen(ymajor)/(ymajor-1)
+ytickname = strcompress(ytickvalues,/remove_all)
+plt = plot(f_d,z,'k-', $
+           xtitle = 'Dust density [$m^{-3}$]', $
+           ytitle = 'Vertical distance [m]', $
+           ystyle = 1, $
+           ymajor = ymajor, $
+           yminor = yminor, $
+           ytickvalues = ytickvalues, $
+           ytickname = ytickname, $
+           font_name = 'Times', $
+           font_size = 16, $
+           /buffer)
+print, "Saving ",name,"..."
+plt.save, name
+plt.close
+print, "Finished"
+
+name = "initial_densities-run009.pdf"
+f_i = n0d1+indgen(n_z)
+f_e = f_i-f_d
+ymajor = 5
+yminor = 3
+ytickvalues = fix(L_z)*indgen(ymajor)/(ymajor-1)
+ytickname = strcompress(ytickvalues,/remove_all)
+plt = plot(f_i,z,'k-', $
+           xtitle = 'Density [$m^{-3}$]', $
+           xrange = [0,2e10], $
+           ytitle = 'Vertical distance [m]', $
+           ystyle = 1, $
+           ymajor = ymajor, $
+           yminor = yminor, $
+           ytickvalues = ytickvalues, $
+           ytickname = ytickname, $
+           font_name = 'Times', $
+           font_size = 16, $
+           name = 'Ions', $
+           /buffer)
+op1 = plot(f_e,z,'r-', $
+           name='Electrons', $
+           /overplot)
+op2 = plot(f_d,z,'b-', $
+           name='Dust', $
+           /overplot)
+lgd = legend(target = [plt,op1,op2], $
+             position = [0.8,0.8], $
+             horizontal_alignment = 'right', $
+             vertical_alignment = 'top', $
+             /auto_text_color)
+print, "Saving ",name,"..."
+plt.save, name
+plt.close
+print, "Finished"
+
+name = "initial_densities-run010.pdf"
+f_i = 0.5*Z_d*f_d*(1+sqrt(1+(2*n0d1/Z_d/f_d)^2))
+f_e = f_i-f_d
+ymajor = 5
+yminor = 3
+ytickvalues = fix(L_z)*indgen(ymajor)/(ymajor-1)
+ytickname = strcompress(ytickvalues,/remove_all)
+plt = plot(f_i,z,'k-', $
+           xtitle = 'Density [$m^{-3}$]', $
+           xrange = [0,2e10], $
+           ytitle = 'Vertical distance [m]', $
+           ystyle = 1, $
+           ymajor = ymajor, $
+           yminor = yminor, $
+           ytickvalues = ytickvalues, $
+           ytickname = ytickname, $
+           font_name = 'Times', $
+           font_size = 16, $
+           name = 'Ions', $
+           /buffer)
+op1 = plot(f_e,z,'r-', $
+           name='Electrons', $
+           /overplot)
+op2 = plot(f_d,z,'b-', $
+           name='Dust', $
+           /overplot)
+lgd = legend(target = [plt,op1,op2], $
+             position = [0.8,0.8], $
+             horizontal_alignment = 'right', $
+             vertical_alignment = 'top', $
+             /auto_text_color)
+print, "Saving ",name,"..."
+plt.save, name
+plt.close
+print, "Finished"
+
+name = "initial_densities-run011.pdf"
+f_i = f_d+n0d1
+f_e = f_i-f_d
+ymajor = 5
+yminor = 3
+ytickvalues = fix(L_z)*indgen(ymajor)/(ymajor-1)
+ytickname = strcompress(ytickvalues,/remove_all)
+plt = plot(f_i,z,'k-', $
+           xtitle = 'Density [$m^{-3}$]', $
+           xrange = [0,2e10], $
+           ytitle = 'Vertical distance [m]', $
+           ystyle = 1, $
+           ymajor = ymajor, $
+           yminor = yminor, $
+           ytickvalues = ytickvalues, $
+           ytickname = ytickname, $
+           font_name = 'Times', $
+           font_size = 16, $
+           name = 'Ions', $
+           /buffer)
+op1 = plot(f_e,z,'r-', $
+           name='Electrons', $
+           /overplot)
+op2 = plot(f_d,z,'b-', $
+           name='Dust', $
+           /overplot)
+lgd = legend(target = [plt,op1,op2], $
+             position = [0.8,0.8], $
+             horizontal_alignment = 'right', $
+             vertical_alignment = 'top', $
+             /auto_text_color)
+print, "Saving ",name,"..."
+plt.save, name
+plt.close
+print, "Finished"
+

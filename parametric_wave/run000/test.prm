@@ -1,0 +1,8 @@
+;+
+; Parameter list: test
+;-
+
+p0 = 1
+p1 = 'str'
+p2 = 4.5
+p3 = fltarr(4,4)

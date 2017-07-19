@@ -1,0 +1,19 @@
+@load_eppic_params
+timestep = nout*[1,ntMax-1]
+nSteps = n_elements(timestep)
+;; gfxInds = {x0:0, $
+;;            xf:grid.nx-1, $
+;;            y0:grid.ny/2-grid.ny/4, $
+;;            yf:grid.ny/2+grid.ny/4-1, $
+;;            z0:0, $
+;;            zf:0, $
+;;            t0:0, $
+;;            tf:ntMax-1}
+gfxInds = {x0:0, $
+           xf:grid.nx-1, $
+           y0:grid.ny/2-grid.ny/4, $
+           yf:grid.ny/2+grid.ny/4-1, $
+           z0:0, $
+           zf:0, $
+           t0:0, $
+           tf:nSteps-1}

@@ -19,3 +19,7 @@ prj = set_current_prj(data,rngs,grid, $
                       title=title)
 ;;==Free memory
 delvar, rngs
+
+;;==Set graphics keywords
+kw = set_default_kw('den',prj=prj,/image,/colorbar)
+prj['kw'] = kw

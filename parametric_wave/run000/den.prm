@@ -71,7 +71,8 @@ yrange = [ytickvalues[0],ytickvalues[ymajor-1]]
 ;;          font_name: "Times", $
 ;;          rgb_table: rgb_table, $
 ;;          buffer: 1B}
-kw = set_default_kw_den(prj=prj,/image)
+
+;; prj = set_default_kw_den(prj=prj,/image)
 
 ;; img_pos = image.position
 ;; cb_width = 0.03

@@ -1,1 +1,3 @@
-This directory was originally created to hold project-specific IDL parameter files. It may grow to hold other project-specific information that needs to be backed up (i.e. can't live on /projectnb).
+This directory was originally created to hold project-specific IDL parameter files. It may grow to hold other project-specific information that needs to be backed up (i.e. can't live on an unbacked-up disk like SCC /projectnb or Stampede /work, or a temporary disk like Stampede /scratch).
+
+09Aug2017: Now contains params.tar files. (may)

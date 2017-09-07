@@ -36,13 +36,22 @@ prj['kw'] = set_default_kw(prj.data.keys(),prj=prj,/image,/colorbar,global=globa
 
 ;;==Modify specific keywords for this project
 nData = n_elements(dataName)
-for id=0,nData-1 do $
-   prj.kw[dataName[id]].image['xtitle'] = "Zonal [m]"
-for id=0,nData-1 do $
-   prj.kw[dataName[id]].image['ytitle'] = "Vertical [m]"
-for id=0,nData-1 do $
-   prj.kw[dataName[id]].image['title'] = "t = "+strcompress( $
-   string(1e3*dt*plotStep,format='(f7.2)'), $
-   /remove_all)+" ms"
-for id=0,nData-1 do $
-   prj.kw[dataName[id]].colorbar['global'] = global
+;**image**
+add_keys = list()
+add_vals = list()
+add_keys.add, 'xtitle'
+add_vals.add, "Zonal [m]"
+add_keys.add, 'ytitle'
+add_vals.add, "Vertical [m]"
+add_keys.add, 'title'
+add_vals.add, "t = "+strcompress(string(1e3*dt*plotStep,format='(f7.2)'), $
+                                   /remove_all)+" ms"
+;; add_keys.add, 'dimensions'
+;; add_vals.add, [grid.ny,0.95*grid.nx]
+for id=0,nData-1 do prj.kw[dataName[id]].image[add_keys.toarray()] = add_vals
+;**colorbar**
+add_keys = list()
+add_vals = list()
+add_keys.add, 'global'
+add_vals.add, global
+for id=0,nData-1 do prj.kw[dataName[id]].colorbar[add_keys.toarray()] = add_vals

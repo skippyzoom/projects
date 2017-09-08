@@ -1,6 +1,10 @@
 ;;==Declare project title
 title = "Parameter Space: test012"
 
+;;==Declare names of all graphics quantities
+;; kw_names = [dataName.toarray(),'fft']
+kw_names = dataName.toarray()
+
 ;;==Declare data scaling values for some or all quantities
 scale = dictionary('den1', 1e2, $
                    'phi', 1e3, $
@@ -24,6 +28,7 @@ prj = set_current_prj(data,rngs,grid, $
                       np = np, $
                       xyzt = xyzt, $
                       title = title)
+
 ;;==Free memory
 delvar, rngs
 
@@ -32,7 +37,8 @@ set_data_units, prj,units
 
 ;;==Set default graphics keywords
 global = 1B
-prj['kw'] = set_default_kw(prj.data.keys(),prj=prj,/image,/colorbar,global=global)
+;; prj['kw'] = set_default_kw(prj.data.keys(),prj=prj,/image,/colorbar,global=global)
+prj['kw'] = set_default_kw(kw_names,prj=prj,/image,/colorbar,global=global)
 
 ;;==Modify specific keywords for this project
 nData = n_elements(dataName)

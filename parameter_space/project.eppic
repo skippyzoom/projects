@@ -32,13 +32,48 @@ delvar, rngs
 set_data_units, prj,units
 
 ;;==Declare graphics keywords specific to this project
-project_kw = dictionary()
-project_kw['image'] = dictionary('keys',list(),'vals',list())
-project_kw.image.keys.add, 'xtitle'
-project_kw.image.vals.add, "Zonal [m]"
-project_kw.image.keys.add, 'ytitle'
-project_kw.image.vals.add, "Vertical [m]"
-project_kw.image.keys.add, 'title'
-project_kw.image.vals.add, "t = "+ $
+;-->Eventually put this into set_project_kw.pro
+project_kw = dictionary('den1', dictionary(), $
+                        'phi', dictionary(), $
+                        'emag', dictionary(), $
+                        'fft', dictionary())
+
+project_kw.den1['image'] = dictionary('keys',list(),'vals',list())
+project_kw.den1.image.keys.add, 'xtitle'
+project_kw.den1.image.vals.add, "Zonal [m]"
+project_kw.den1.image.keys.add, 'ytitle'
+project_kw.den1.image.vals.add, "Vertical [m]"
+project_kw.den1.image.keys.add, 'title'
+project_kw.den1.image.vals.add, "t = "+ $
+   strcompress(string(1e3*dt*plotStep,format='(f7.2)'), $
+               /remove_all)+" ms"
+
+project_kw.phi['image'] = dictionary('keys',list(),'vals',list())
+project_kw.phi.image.keys.add, 'xtitle'
+project_kw.phi.image.vals.add, "Zonal [m]"
+project_kw.phi.image.keys.add, 'ytitle'
+project_kw.phi.image.vals.add, "Vertical [m]"
+project_kw.phi.image.keys.add, 'title'
+project_kw.phi.image.vals.add, "t = "+ $
+   strcompress(string(1e3*dt*plotStep,format='(f7.2)'), $
+               /remove_all)+" ms"
+
+project_kw.emag['image'] = dictionary('keys',list(),'vals',list())
+project_kw.emag.image.keys.add, 'xtitle'
+project_kw.emag.image.vals.add, "Zonal [m]"
+project_kw.emag.image.keys.add, 'ytitle'
+project_kw.emag.image.vals.add, "Vertical [m]"
+project_kw.emag.image.keys.add, 'title'
+project_kw.emag.image.vals.add, "t = "+ $
+   strcompress(string(1e3*dt*plotStep,format='(f7.2)'), $
+               /remove_all)+" ms"
+
+project_kw.fft['image'] = dictionary('keys',list(),'vals',list())
+project_kw.fft.image.keys.add, 'xtitle'
+project_kw.fft.image.vals.add, "Zonal [m$^{-1}$]"
+project_kw.fft.image.keys.add, 'ytitle'
+project_kw.fft.image.vals.add, "Vertical [m$^{-1}$]"
+project_kw.fft.image.keys.add, 'title'
+project_kw.fft.image.vals.add, "t = "+ $
    strcompress(string(1e3*dt*plotStep,format='(f7.2)'), $
                /remove_all)+" ms"
